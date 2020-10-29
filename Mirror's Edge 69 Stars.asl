@@ -1,19 +1,14 @@
 state("MirrorsEdge") {
     
-    int checkpoint : 0x01C499C0, 0xC4, 0x78, 0x2C, 0x3D4;
-
-    // These doesn't work with current pointer path with offsets
-    /*
-    playground1
-    playground2
-    playground3
-    heat
-    burfield
-    factory
-    office
-    shard1
-    shard2
+    /* Possible pointer path with offsets
+    0x01BFBB70, 0x4, 0x1F4, 0x318, 0x3D4;
+    0x01BFBB70, 0x1F4, 0x318, 0x3D4;
+        
+    0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D4;
+    0x01BFBCA4, 0x54, 0x1E0, 0x318, 0x3D4;
     */
+
+    int checkpoint : 0x01BFBB70, 0x4, 0x1F4, 0x318, 0x3D4;
 }
 
 // This below is just for testing if it worked
