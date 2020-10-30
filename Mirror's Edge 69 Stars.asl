@@ -5,15 +5,14 @@ state("MirrorsEdge") {
 }
 
 startup {
-    // Todo: fix name
-    settings.Add("a", true, "A");
-    settings.SetToolTip("a", "Split only when you finish a time trial");
+    settings.Add("splitFinish", true, "Split at end of a Time Trial");
+    settings.SetToolTip("splitFinish", "It will only split when you finish a time trial");
 
-    settings.Add("b", false, "B");
-    settings.SetToolTip("b", "Split everytime where it would display if you're ahead or behind current ghost");
+    settings.Add("splitBehindorAhead", false, "Split when text shows up");
+    settings.SetToolTip("splitBehindorAhead", "Split everytime where it would display if you're ahead or behind current ghost");
 
-    settings.Add("c", false, "C");
-    settings.SetToolTip("c", "Split everytime you touch a checkpoint (You need a lot of splits ~200)");
+    settings.Add("splitEverytime", false, "Split everytime");
+    settings.SetToolTip("splitEverytime", "If you touch a checkpoint, it will split. When using this, you'll get better sum of best but you need 214 splits!");
 
     vars.tt_finalCheckpoint = new List<int>
 	{
@@ -51,9 +50,23 @@ start {
 }
 
 split {
-    if (current.tt_checkpoint > old.tt_checkpoint) {
-        if (current.tt_checkpoint == vars.tt_finalCheckpoint[current.tt_id]) {
+    if (settings["splitFinish"]) {
+        if (current.tt_checkpoint > old.tt_checkpoint) {
+            if (current.tt_checkpoint == vars.tt_finalCheckpoint[current.tt_id]) {
+                return true;
+            } 
+        }
+    }
+
+    if (settings["splitBehindorAhead"]) {
+        if (current.tt_checkpoint_time > old.tt_checkpoint_time) {
             return true;
-        } 
+        }
+    }
+
+    if (settings["splitEverytime"]) {
+        if (current.tt_checkpoint > old.tt_checkpoint) {
+            return true;
+        }
     }
 }
