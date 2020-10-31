@@ -1,18 +1,28 @@
-state("MirrorsEdge") {
-    // Steam
+state ("MirrorsEdge", "Steam") {
     int tt_checkpoint : 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D4;
     int tt_checkpoint_time : 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D8;
     int tt_id : 0x01C47514, 0x28, 0x48, 0x3C, 0xFC;
-
     float x : 0x01C553D0, 0xCC, 0x1CC, 0xD0, 0x10, 0xE8;
+    bool tt_selectionMenu : 0x01C47158, 0x44, 0xC8, 0x56C, 0x158, 0x1C4;
+}
 
-    bool tt_selectionMenu : 0x01C47158, 0x44, 0xC8, 0x56C, 0x158, 0x1C4; // Turns to true even if you're viewing speed run or leaderboard
-
-    /* Origin (Work In Progress)
+state ("MirrorsEdge", "Origin") {
     int tt_checkpoint : 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D4;
     int tt_checkpoint_time : 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D8;
     int tt_id : 0x01C6EFE0, 0x1A0, 0x74, 0xC, 0xFC;
-    */
+    float x : 0x01B7C39C, 0xCC, 0x70, 0x2F8, 0xE8; 
+    bool tt_selectionMenu : 0x01C5E4F0, 0x10, 0x28, 0xC8, 0x56C, 0xE0;
+}
+
+init {
+    if (modules.First().ModuleMemorySize.ToString() == "32976896") {
+        version = "Steam";
+    } else if (modules.First().ModuleMemorySize.ToString() == "42889216") {
+        version = "Origin";
+    } else {
+        version = "Unknown [" + modules.First().ModuleMemorySize.ToString() + "] :(";
+        print(modules.First().ModuleMemorySize.ToString());
+    }
 }
 
 startup {
@@ -73,14 +83,12 @@ split {
             } 
         }
     }
-
-    if (settings["splitBehindorAhead"]) {
+    else if (settings["splitBehindorAhead"]) {
         if (current.tt_checkpoint_time > old.tt_checkpoint_time) {
             return true;
         }
     }
-
-    if (settings["splitEverytime"]) {
+    else if (settings["splitEverytime"]) {
         if (current.tt_checkpoint > old.tt_checkpoint) {
             return true;
         }
