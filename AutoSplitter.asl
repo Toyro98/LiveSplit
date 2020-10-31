@@ -4,10 +4,8 @@ state("MirrorsEdge") {
     int tt_checkpoint_time : 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D8;
     int tt_id : 0x01C47514, 0x28, 0x48, 0x3C, 0xFC;
 
-    float x : 0x01C553D0, 0xCC, 0x1CC, 0xD0, 0xE8;
-    float y : 0x01C553D0, 0xCC, 0x1CC, 0xD0, 0xF0;
-    float z : 0x01C553D0, 0xCC, 0x1CC, 0xD0, 0xEC;
-    
+    float x : 0x01C553D0, 0xCC, 0x1CC, 0xD0, 0x10, 0xE8;
+
     /* Origin
     int tt_checkpoint : 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D4;
     int tt_checkpoint_time : 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D8;
@@ -17,7 +15,7 @@ state("MirrorsEdge") {
 
 startup {
     settings.Add("splitFinish", true, "Split at end of a Time Trial");
-    settings.SetToolTip("splitFinish", "It will only split when you finish a time trial");
+    settings.SetToolTip("splitFinish", "It will only split when you finish a Time Trial");
 
     settings.Add("splitBehindorAhead", false, "Split when text shows up");
     settings.SetToolTip("splitBehindorAhead", "Split everytime where it would display if you're ahead or behind current ghost");
@@ -54,9 +52,12 @@ startup {
 }
 
 start {
-    // Fix later
-    if (current.tt_checkpoint == 0 && current.tt_id == 0 && current.x != old.x && current.y != old.y && current.z != old.z) {
-        return true;
+	if (current.tt_checkpoint == 0 && current.tt_id == 0 && current.x != -79.89811f) {
+        if (old.x == -79.89811f) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
