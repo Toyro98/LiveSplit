@@ -52,7 +52,7 @@ startup {
 }
 
 start {
-	if (current.tt_checkpoint == 0 && current.tt_id == 0 && current.x != -79.89811f) {
+    if (current.tt_checkpoint == 0 && current.tt_id == 0 && current.x != -79.89811f) {
         if (old.x == -79.89811f) {
             return true;
         } else {
