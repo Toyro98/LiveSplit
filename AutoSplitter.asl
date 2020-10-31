@@ -6,7 +6,9 @@ state("MirrorsEdge") {
 
     float x : 0x01C553D0, 0xCC, 0x1CC, 0xD0, 0x10, 0xE8;
 
-    /* Origin
+    bool tt_selectionMenu : 0x01C47158, 0x44, 0xC8, 0x56C, 0x158, 0x1C4; // Turns to true even if you're viewing speed run or leaderboard
+
+    /* Origin (Work In Progress)
     int tt_checkpoint : 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D4;
     int tt_checkpoint_time : 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D8;
     int tt_id : 0x01C6EFE0, 0x1A0, 0x74, 0xC, 0xFC;
@@ -52,11 +54,13 @@ startup {
 }
 
 start {
-    if (current.tt_checkpoint == 0 && current.tt_id == 0 && current.x != -79.89811f) {
-        if (old.x == -79.89811f) {
-            return true;
-        } else {
-            return false;
+    if (old.tt_selectionMenu == true) {
+        if (current.tt_checkpoint == 0 && current.tt_id == 0 && current.x != -79.89811f) {
+            if (old.x == -79.89811f) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }
