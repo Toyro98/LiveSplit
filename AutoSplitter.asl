@@ -1,3 +1,7 @@
+// Autosplitter for Mirror's Edge for the category "69 Stars"
+// Made by: Toyro98
+// Updated: 3th Nov 2020
+
 state ("MirrorsEdge", "Steam") {
     int tt_checkpoint : 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D4;
     int tt_checkpoint_time : 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D8;
