@@ -1,6 +1,8 @@
-// Autosplitter for Mirror's Edge for the category "69 Stars"
+// Autosplitter for the game Mirror's Edge for the category "69 Stars"
 // Made by: Toyro98
-// Updated: 3th Nov 2020
+
+// Created: 28th Oct 2020
+// Updated: 4th Nov 2020
 
 state ("MirrorsEdge", "Steam") {
     int tt_checkpoint : 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D4;
@@ -41,9 +43,9 @@ startup {
     settings.SetToolTip("splitFinish", "It will only split when you finish a Time Trial");
 
     settings.Add("splitBehindorAhead", false, "Split when text shows up");
-    settings.SetToolTip("splitBehindorAhead", "Split everytime where it would display if you're ahead or behind current ghost");
+    settings.SetToolTip("splitBehindorAhead", "Split every time where it would display if you're ahead or behind current ghost");
 
-    settings.Add("splitEverytime", false, "Split everytime");
+    settings.Add("splitEverytime", false, "Split every time");
     settings.SetToolTip("splitEverytime", "If you touch a checkpoint, it will split. When using this, you'll get better sum of best but you need 214 splits!");
 
     vars.tt_finalCheckpoint = new List<int> 
