@@ -2,7 +2,7 @@
 // Made by: Toyro98
 
 // Created: 28th Oct 2020
-// Updated: 21th Nov 2020
+// Updated: 29th Nov 2020
 
 state ("MirrorsEdge", "Steam") {
     int tt_total_checkpoints : 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D0;
@@ -37,7 +37,6 @@ init {
         version = "GoG";
     } else {
         version = "Unknown";
-        print(modules.First().ModuleMemorySize.ToString());
     }
 }
 
@@ -56,8 +55,6 @@ start {
     if (current.tt_checkpoint == 0 && current.tt_id == 0 && current.x != -79.89811f) {
         if (old.x == -79.89811f) {
             return true;
-        } else {
-            return false;
         }
     }
 }
