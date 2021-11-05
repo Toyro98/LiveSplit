@@ -6,7 +6,7 @@ state ("MirrorsEdge", "Unknown Version") {}
 state ("MirrorsEdge", "Steam") 
 {
     // Prevent it from automatically starting if you closed the game and timer isn't running (Thank you tdog20)
-	bool loading: 0x1BFA620;
+    // bool loading: 0x1BFA620;
 
     // Time Trial 
     int totalCheckpoints: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D0;
@@ -25,7 +25,7 @@ state ("MirrorsEdge", "Steam")
 
 state ("MirrorsEdge", "Origin") 
 {
-    bool loading: 0x1C19AB0;
+    // bool loading: 0x1C19AB0;
 
     int totalCheckpoints: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D0;
     int currentCheckpoint: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D4;
@@ -41,7 +41,7 @@ state ("MirrorsEdge", "Origin")
 
 state ("MirrorsEdge", "GoG") 
 {
-	bool loading: 0x1BFA620;
+	// bool loading: 0x1BFA620;
 
     int totalCheckpoints: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D0;
     int currentCheckpoint: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D4;
@@ -57,7 +57,7 @@ state ("MirrorsEdge", "GoG")
 
 state ("MirrorsEdge", "Reloaded") 
 {
-    bool loading: 0x1C136D4;
+    // bool loading: 0x1C136D4;
 
     int totalCheckpoints: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x3D0;
     int currentCheckpoint: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x3D4;
@@ -108,7 +108,7 @@ start
 {
     if (current.currentTimeTrialID == 0 && current.playerX != -79.89811f)
     {
-        if (old.playerX == -79.89811f && old.loading == false && current.loading == true)
+        if (old.playerX == -79.89811f /* && old.loading == false && current.loading == true */)
         {
             return true;
         }
