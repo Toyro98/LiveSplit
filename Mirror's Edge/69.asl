@@ -1,5 +1,34 @@
-// Autosplitter for the game Mirror's Edge for the category "69 Stars"
-// Made by: Toyro98
+/* 
+* Autosplitter for the game Mirror's Edge for the category "69 Stars"
+* Made by: Toyro98
+* 
+* If you want to start on another time trial rather than Playground One
+* Go to line 120 and change the 15 to one of these belows  
+*
+* 15    Playground One
+* 16    Playground Two
+* 21    Playground Three
+* 4     Edge
+* 23    Arland
+* 22    Flight
+* 6     Chase
+* 7     Stormdrains One
+* 8     Stormdrains Two
+* 9     Stormdrains Three
+* 20    Burfield
+* 1     Heat
+* 3     Cranes One
+* 2     Cranes Two
+* 14    New Eden
+* 17    Factory
+* 24    Office
+* 12    Convoy One
+* 13    Convoy Two
+* 10    Atrium One
+* 11    Atrium Two
+* 18    Shard One
+* 19    Shard Two
+*/
 
 state ("MirrorsEdge", "Unknown") {}
 
@@ -9,6 +38,7 @@ state ("MirrorsEdge", "Steam")
     int totalCheckpoints: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D0;
     int currentCheckpoint: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D4;
     byte activeTTStretch: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3F9;
+    float timeFinishedAt: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x424;
     
     // Qualifying Times
     float star_3: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x408;
@@ -21,6 +51,7 @@ state ("MirrorsEdge", "Origin")
     int totalCheckpoints: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D0;
     int currentCheckpoint: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D4;
     byte activeTTStretch: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3F9;
+    float timeFinishedAt: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x424;
     
     float star_3: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x408;
     float star_2: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x40C;
@@ -32,6 +63,7 @@ state ("MirrorsEdge", "GoG")
     int totalCheckpoints: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D0;
     int currentCheckpoint: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D4;
     byte activeTTStretch: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3F9;
+    float timeFinishedAt: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x424;
     
     float star_3: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x408;
     float star_2: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x40C;
@@ -43,6 +75,7 @@ state ("MirrorsEdge", "Reloaded")
     int totalCheckpoints: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x3D0;
     int currentCheckpoint: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x3D4;
     byte activeTTStretch: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x3F9;
+    float timeFinishedAt: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x424;
     
     float star_3: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x408;
     float star_2: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x40C;
@@ -98,13 +131,8 @@ split
         {
             if (settings["3Star"] == true) 
             {
-                if (current.star_3 > Math.Round(current.timeFinishedAt, 2)) 
-                {
-                    return true;
-                }
-                
-                return false;
-            } 
+                return current.star_3 > Math.Round(current.timeFinishedAt, 2);
+            }
             
             return true;
         }
