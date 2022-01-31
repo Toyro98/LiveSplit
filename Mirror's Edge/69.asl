@@ -35,8 +35,8 @@ state ("MirrorsEdge", "Unknown") {}
 state ("MirrorsEdge", "Steam") 
 {
     // Time Trial 
+    int checkpoint: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D4;
     int totalCheckpoints: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D0;
-    int currentCheckpoint: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D4;
     byte activeTTStretch: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3F9;
     float timeFinishedAt: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x424;
     
@@ -48,8 +48,8 @@ state ("MirrorsEdge", "Steam")
 
 state ("MirrorsEdge", "Origin") 
 {
+    int checkpoint: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D4;
     int totalCheckpoints: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D0;
-    int currentCheckpoint: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D4;
     byte activeTTStretch: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3F9;
     float timeFinishedAt: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x424;
     
@@ -60,8 +60,8 @@ state ("MirrorsEdge", "Origin")
 
 state ("MirrorsEdge", "GoG") 
 {
+    int checkpoint: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D4;
     int totalCheckpoints: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D0;
-    int currentCheckpoint: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D4;
     byte activeTTStretch: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3F9;
     float timeFinishedAt: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x424;
     
@@ -72,8 +72,8 @@ state ("MirrorsEdge", "GoG")
 
 state ("MirrorsEdge", "Reloaded") 
 {
+    int checkpoint: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x3D4;
     int totalCheckpoints: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x3D0;
-    int currentCheckpoint: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x3D4;
     byte activeTTStretch: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x3F9;
     float timeFinishedAt: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x424;
     
@@ -84,8 +84,10 @@ state ("MirrorsEdge", "Reloaded")
 
 startup
 {
-    settings.Add("3Star", true, "3 Star Requirement");
-    settings.SetToolTip("3Star", "If true, only split when you beat 3 stars on a time trial. Otherwise, it ignores the star requirement and splits when you finish a time trial");
+    settings.Add("StarRequirement", true, "Star Requirement");
+    settings.Add("3Star", true, "3 Stars", "StarRequirement");
+    settings.Add("2Star", false, "2 Stars", "StarRequirement");
+    settings.Add("1Star", false, "1 Star", "StarRequirement");
 }
 
 init 
@@ -125,15 +127,31 @@ start
 
 split 
 {
-    if (current.currentCheckpoint > old.currentCheckpoint) 
+    if (current.checkpoint > old.checkpoint) 
     {
-        if (current.currentCheckpoint == current.totalCheckpoints) 
+        if (current.checkpoint == current.totalCheckpoints) 
         {
+            if (settings["StarRequirement"] == false) 
+            {
+                return true;
+            }
+
             if (settings["3Star"] == true) 
             {
                 return current.star_3 > Math.Round(current.timeFinishedAt, 2);
             }
-            
+
+            if (settings["2Star"] == true) 
+            {
+                return current.star_2 > Math.Round(current.timeFinishedAt, 2);
+            }
+
+            if (settings["1Star"] == true) 
+            {
+                return current.star_1 > Math.Round(current.timeFinishedAt, 2);
+            }
+
+            // This should only happen if StarRequirement is true and the others set to false
             return true;
         }
     } 
