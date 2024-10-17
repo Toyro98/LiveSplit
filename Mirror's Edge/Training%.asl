@@ -78,8 +78,7 @@ startup
 
 update
 {
-    // Debug stuff. You need DebugView to see it
-    // Useful if you want to create your own rules where to split
+    // Debug stuff. You need DebugView to see it. Useful if you want to create your own rules where to split
 
     /*
     if (current.movementChallenge != old.movementChallenge) 
@@ -117,13 +116,13 @@ split
         return false;
     }
 
-    if (settings["withTab"] == true) 
+    if (settings["withTab"]) 
     {
         // The Basics -> Advanced combat
         return old.movementChallenge != 30 && current.movementChallenge == 30;
     }
 
-    if (settings["noTab"] == true) 
+    if (settings["noTab"]) 
     {
         // The Basics -> Follow the leader
         if (vars.splitIndex == 0 && (old.movementChallenge == 0 || old.movementChallenge == 5) && current.movementChallenge == 6) 

@@ -3,7 +3,7 @@ state ("MirrorsEdge", "Unknown") {}
 state ("MirrorsEdge", "Steam") 
 {
     // Time Trial 
-    int checkpoint: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D4;
+    int checkpointsPassed: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D4;
     int totalCheckpoints: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3D0;
     byte activeTTStretch: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x3F9;
     float finishedTime: 0x01BFBCA4, 0x50, 0x1E0, 0x318, 0x424;
@@ -16,11 +16,10 @@ state ("MirrorsEdge", "Steam")
 
 state ("MirrorsEdge", "Origin") 
 {
-    int checkpoint: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D4;
+    int checkpointsPassed: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D4;
     int totalCheckpoints: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3D0;
     byte activeTTStretch: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x3F9;
     float finishedTime: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x424;
-    
     float star_3: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x408;
     float star_2: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x40C;
     float star_1: 0x01C14D64, 0x54, 0x1E0, 0x318, 0x410;
@@ -28,11 +27,10 @@ state ("MirrorsEdge", "Origin")
 
 state ("MirrorsEdge", "Reloaded") 
 {
-    int checkpoint: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x3D4;
+    int checkpointsPassed: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x3D4;
     int totalCheckpoints: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x3D0;
     byte activeTTStretch: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x3F9;
     float finishedTime: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x424;
-    
     float star_3: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x408;
     float star_2: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x40C;
     float star_1: 0x01C14D5C, 0x54, 0x1E0, 0x318, 0x410;
@@ -40,11 +38,10 @@ state ("MirrorsEdge", "Reloaded")
 
 state ("MirrorsEdge", "Origin (Asia)") 
 {
-    int checkpoint: 0x01BE6134, 0x50, 0x1E0, 0x318, 0x3D4;
+    int checkpointsPassed: 0x01BE6134, 0x50, 0x1E0, 0x318, 0x3D4;
     int totalCheckpoints: 0x01BE6134, 0x50, 0x1E0, 0x318, 0x3D0;
     byte activeTTStretch: 0x01BE6134, 0x50, 0x1E0, 0x318, 0x3F9;
     float finishedTime: 0x01BE6134, 0x50, 0x1E0, 0x318, 0x424;
-    
     float star_3: 0x01BE6134, 0x50, 0x1E0, 0x318, 0x408;
     float star_2: 0x01BE6134, 0x50, 0x1E0, 0x318, 0x40C;
     float star_1: 0x01BE6134, 0x50, 0x1E0, 0x318, 0x410;
@@ -52,11 +49,10 @@ state ("MirrorsEdge", "Origin (Asia)")
 
 state ("MirrorsEdge", "Origin (DLC)") 
 {
-    int checkpoint: 0x01C1BE24, 0x50, 0x1E0, 0x318, 0x3D4;
+    int checkpointsPassed: 0x01C1BE24, 0x50, 0x1E0, 0x318, 0x3D4;
     int totalCheckpoints: 0x01C1BE24, 0x50, 0x1E0, 0x318, 0x3D0;
     byte activeTTStretch: 0x01C1BE24, 0x50, 0x1E0, 0x318, 0x3F9;
     float finishedTime: 0x01C1BE24, 0x50, 0x1E0, 0x318, 0x424;
-    
     float star_3: 0x01C1BE24, 0x50, 0x1E0, 0x318, 0x408;
     float star_2: 0x01C1BE24, 0x50, 0x1E0, 0x318, 0x40C;
     float star_1: 0x01C1BE24, 0x50, 0x1E0, 0x318, 0x410;
@@ -110,29 +106,26 @@ start
 
 split 
 {
-    if (current.checkpoint > old.checkpoint) 
+    if (current.checkpointsPassed > old.checkpointsPassed && current.checkpointsPassed == current.totalCheckpoints) 
     {
-        if (current.checkpoint == current.totalCheckpoints) 
+        if (!settings["StarRequirement"]) 
         {
-            if (settings["StarRequirement"] == false) 
-            {
-                return true;
-            }
+            return true;
+        }
 
-            if (settings["3Star"] == true) 
-            {
-                return current.star_3 > Math.Round(current.finishedTime, 2);
-            }
+        if (settings["3Star"]) 
+        {
+            return current.star_3 > Math.Round(current.finishedTime, 2);
+        }
 
-            if (settings["2Star"] == true) 
-            {
-                return current.star_2 > Math.Round(current.finishedTime, 2);
-            }
+        if (settings["2Star"]) 
+        {
+            return current.star_2 > Math.Round(current.finishedTime, 2);
+        }
 
-            if (settings["1Star"] == true) 
-            {
-                return current.star_1 > Math.Round(current.finishedTime, 2);
-            }
+        if (settings["1Star"]) 
+        {
+            return current.star_1 > Math.Round(current.finishedTime, 2);
         }
     } 
 }

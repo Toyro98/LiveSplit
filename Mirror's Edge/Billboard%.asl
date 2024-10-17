@@ -5,46 +5,42 @@ state ("MirrorsEdge", "Steam")
     // Player's Z position
     float playerPosZ: 0x01C553D0, 0xCC, 0x1CC, 0x2F8, 0xF0;
 
-    // The object's position that player is standing on
-    float objectPosX: 0x01C553D0, 0xCC, 0x1CC, 0x2F8, 0x74, 0xE8;
-    float objectPosY: 0x01C553D0, 0xCC, 0x1CC, 0x2F8, 0x74, 0xEC;
-    float objectPosZ: 0x01C553D0, 0xCC, 0x1CC, 0x2F8, 0x74, 0xF0;
+    // The object's position that the player is standing on
+    float basePosX: 0x01C553D0, 0xCC, 0x1CC, 0x2F8, 0x74, 0xE8;
+    float basePosY: 0x01C553D0, 0xCC, 0x1CC, 0x2F8, 0x74, 0xEC;
+    float basePosZ: 0x01C553D0, 0xCC, 0x1CC, 0x2F8, 0x74, 0xF0;
 }
 
 state ("MirrorsEdge", "Origin")  
 {
     float playerPosZ: 0x01C6E50C, 0xCC, 0x1CC, 0x2F8, 0xF0;
-
-    float objectPosX: 0x01C6E50C, 0xCC, 0x1CC, 0x2F8, 0x74, 0xE8;
-    float objectPosY: 0x01C6E50C, 0xCC, 0x1CC, 0x2F8, 0x74, 0xEC;
-    float objectPosZ: 0x01C6E50C, 0xCC, 0x1CC, 0x2F8, 0x74, 0xF0;
+    float basePosX: 0x01C6E50C, 0xCC, 0x1CC, 0x2F8, 0x74, 0xE8;
+    float basePosY: 0x01C6E50C, 0xCC, 0x1CC, 0x2F8, 0x74, 0xEC;
+    float basePosZ: 0x01C6E50C, 0xCC, 0x1CC, 0x2F8, 0x74, 0xF0;
 }
 
 state ("MirrorsEdge", "Reloaded") 
 {
     float playerPosZ: 0x01C6E50C, 0xCC, 0x1CC, 0x2F8, 0xF0;
-
-    float objectPosX: 0x01C6E50C, 0xCC, 0x1CC, 0x2F8, 0x74, 0xE8;
-    float objectPosY: 0x01C6E50C, 0xCC, 0x1CC, 0x2F8, 0x74, 0xEC;
-    float objectPosZ: 0x01C6E50C, 0xCC, 0x1CC, 0x2F8, 0x74, 0xF0;
+    float basePosX: 0x01C6E50C, 0xCC, 0x1CC, 0x2F8, 0x74, 0xE8;
+    float basePosY: 0x01C6E50C, 0xCC, 0x1CC, 0x2F8, 0x74, 0xEC;
+    float basePosZ: 0x01C6E50C, 0xCC, 0x1CC, 0x2F8, 0x74, 0xF0;
 }
 
 state ("MirrorsEdge", "Origin (Asia)") 
 {
     float playerPosZ: 0x01B8BE54, 0xCC, 0x1CC, 0x2F8, 0xF0;
-
-    float objectPosX: 0x01B8BE54, 0xCC, 0x1CC, 0x2F8, 0x74, 0xE8;
-    float objectPosY: 0x01B8BE54, 0xCC, 0x1CC, 0x2F8, 0x74, 0xEC;
-    float objectPosZ: 0x01B8BE54, 0xCC, 0x1CC, 0x2F8, 0x74, 0xF0;
+    float basePosX: 0x01B8BE54, 0xCC, 0x1CC, 0x2F8, 0x74, 0xE8;
+    float basePosY: 0x01B8BE54, 0xCC, 0x1CC, 0x2F8, 0x74, 0xEC;
+    float basePosZ: 0x01B8BE54, 0xCC, 0x1CC, 0x2F8, 0x74, 0xF0;
 }
 
 state ("MirrorsEdge", "Origin (DLC)") 
 {
     float playerPosZ: 0x01C7561C, 0xE4, 0x1CC, 0x2F8, 0xF0;
-
-    float objectPosX: 0x01C7561C, 0xE4, 0x1CC, 0x2F8, 0x74, 0xE8;
-    float objectPosY: 0x01C7561C, 0xE4, 0x1CC, 0x2F8, 0x74, 0xEC;
-    float objectPosZ: 0x01C7561C, 0xE4, 0x1CC, 0x2F8, 0x74, 0xF0;
+    float basePosX: 0x01C7561C, 0xE4, 0x1CC, 0x2F8, 0x74, 0xE8;
+    float basePosY: 0x01C7561C, 0xE4, 0x1CC, 0x2F8, 0x74, 0xEC;
+    float basePosZ: 0x01C7561C, 0xE4, 0x1CC, 0x2F8, 0x74, 0xF0;
 }
 
 init 
@@ -81,9 +77,9 @@ init
 
     vars.BillboardsVisited = new List<Vector3f>();
     vars.BillboardLocations = new List<Vector3f>
-	{
+    {
         // Training
-		{ new Vector3f(-3908f, -1280f, 3043f) }, 
+        { new Vector3f(-3908f, -1280f, 3043f) }, 
 
         // 0C
         { new Vector3f(-14232f, -4075f, 6505f) }, 
@@ -117,7 +113,7 @@ init
         { new Vector3f(-7660f, 2560f, 6018f) },
         { new Vector3f(-8222f, 1488f, 6018f) },
         { new Vector3f(-4494f, 2212f, 2809.007324f) },
-	};
+    };
 }
 
 startup
@@ -132,39 +128,39 @@ startup
     }
 }
 
+start 
+{
+    return current.playerPosZ == 0f && old.playerPosZ == 94.83319092f;
+}
+
 split 
 {
-    // If we're standing on an object, we calculate the z distance too see if we're 7.2m above it and below 13m
-    if ((current.playerPosZ - current.objectPosZ) > 720f && (current.playerPosZ - current.objectPosZ) < 1300f) 
+    // Checks if player is within the Z distance range of the base object
+    if (current.basePosZ != 0f && (current.playerPosZ - current.basePosZ) <= 720f || (current.playerPosZ - current.basePosZ) >= 1300f) 
     {
-        for (int i = 0; i < vars.BillboardLocations.Count; i++)
-        {
-            if (vars.BillboardLocations[i].X == current.objectPosX && vars.BillboardLocations[i].Y == current.objectPosY && vars.BillboardLocations[i].Z == current.objectPosZ) 
-            {
-                bool playerHasBeenOnCurrentBillboard = false;
-                for (int j = 0; j < vars.BillboardsVisited.Count; j++)
-                {
-                    if (vars.BillboardLocations[i].X == vars.BillboardsVisited[j].X && vars.BillboardLocations[i].Y == vars.BillboardsVisited[j].Y && vars.BillboardLocations[i].Z == vars.BillboardsVisited[j].Z) 
-                    {
-                        playerHasBeenOnCurrentBillboard = true;
-                    }
-                }
-
-                // If runner hasn't been on the billboard, then we add it to the visited list
-                if (playerHasBeenOnCurrentBillboard == false) 
-                {
-                    vars.BillboardsVisited.Add(new Vector3f(vars.BillboardLocations[i].X, vars.BillboardLocations[i].Y, vars.BillboardLocations[i].Z));
-
-                    // Only split if runners has choosen for it to split after for example 3, 5, 8, 12, and etc 
-                    return settings["billboard_" + vars.BillboardsVisited.Count] == true;
-                }
-
-                return false;
-            }
-        }
+        return false;
     }
 
-    return false;
+    for (int i = 0; i < vars.BillboardLocations.Count; i++)
+    {
+        if (vars.BillboardLocations[i].X == current.basePosX && vars.BillboardLocations[i].Y == current.basePosY && vars.BillboardLocations[i].Z == current.basePosZ) 
+        {
+            for (int j = 0; j < vars.BillboardsVisited.Count; j++)
+            {
+                if (vars.BillboardLocations[i].X == vars.BillboardsVisited[j].X && vars.BillboardLocations[i].Y == vars.BillboardsVisited[j].Y && vars.BillboardLocations[i].Z == vars.BillboardsVisited[j].Z) 
+                {
+                    // Already been on the billboard
+                    return false;
+                }
+            }
+
+            // Runner hasn't been on the current billboard, add it to the visited list
+            vars.BillboardsVisited.Add(vars.BillboardLocations[i]);
+
+            // Only split if runners has choosen for it to split after for example 3, 5, 8, 12, and etc 
+            return settings["billboard_" + vars.BillboardsVisited.Count];
+        }
+    }
 }
 
 onReset
