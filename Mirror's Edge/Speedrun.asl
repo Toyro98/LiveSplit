@@ -70,18 +70,18 @@ init
 
 reset
 {
-    if (current.worldTime == 0.0f)
+    if (current.worldTime == 0f)
     {
-        timer.SetGameTime(TimeSpan.FromSeconds(0.0f));
+        timer.SetGameTime(TimeSpan.FromSeconds(0f));
         return true;
     }
 }
 
 start
 {
-    if (old.speedrunTime == 0.0f && current.speedrunTime > 0.0f)
+    if (old.speedrunTime == 0f && current.speedrunTime > 0f)
     {
-        timer.SetGameTime(TimeSpan.FromSeconds(0.0f));
+        timer.SetGameTime(TimeSpan.FromSeconds(0f));
         return true;
     }
 }
@@ -93,7 +93,7 @@ split
 
 update
 {
-    if (current.speedrunTime > 0.0f && old.isSpeedrunOver == 0)
+    if (current.speedrunTime > 0f)
     {
         timer.SetGameTime(TimeSpan.FromSeconds(current.speedrunTime));
     }
