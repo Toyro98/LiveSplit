@@ -61,15 +61,13 @@ init
             version = "Unknown"; 
             break;
     }
-
-    vars.splitIndex = 0;
 }
 
 startup
 {
     settings.Add("splitType", true, "Split Type");
     settings.Add("noTab", true, "No TAB skip", "splitType");
-    settings.Add("withTab", false, "with TAB skip", "splitType");
+    settings.Add("withTab", false, "With TAB skip", "splitType");
 
     settings.SetToolTip("splitType", "Setting the Split Type to false will make it only split when you finish the training. 1 split required");
     settings.SetToolTip("noTab", "9 splits required");
@@ -93,16 +91,6 @@ update
     */
 }
 
-onStart
-{ 
-    vars.splitIndex = 0;
-}
-
-onSplit
-{
-    vars.splitIndex += 1;
-}
-
 split 
 {
     // It's -1 until the exact frame the save icon appears
@@ -124,49 +112,32 @@ split
 
     if (settings["noTab"]) 
     {
-        // The Basics -> Follow the leader
-        if (vars.splitIndex == 0 && (old.movementChallenge == 0 || old.movementChallenge == 5) && current.movementChallenge == 6) 
+        switch (timer.CurrentSplitIndex)
         {
-            return true;
-        }
+            // The Basics --> Follow the leader
+            case 0: return (old.movementChallenge == 0 || old.movementChallenge == 5) && current.movementChallenge == 6;
+            
+            // Follow the leader --> Balance Walk
+            case 1: return (old.movementChallenge == 0 || old.movementChallenge == 9) && current.movementChallenge == 10;
+            
+            // Balance Walk --> Climbing
+            case 2: return (old.movementChallenge == 0 || old.movementChallenge == 10) && current.movementChallenge == 11;
+            
+            // Climbing --> The L-jump
+            case 3: return (old.movementChallenge == 0 || old.movementChallenge == 15) && current.movementChallenge == 17;
+            
+            // The L-jump --> Zip line
+            case 4: return (old.movementChallenge == 0 || old.movementChallenge == 34) && current.movementChallenge == 18;
 
-        // Follow the leader -> Balance Walk
-        if (vars.splitIndex == 1 && (old.movementChallenge == 0 || old.movementChallenge == 9) && current.movementChallenge == 10)
-        {
-            return true;
-        }
+            // Zip line --> Advanced jumping
+            case 5: return (old.movementChallenge == 0 || old.movementChallenge == 19) && current.movementChallenge == 37;
+            
+            // Advanced jumping --> Basic combat
+            case 6: return (old.movementChallenge == 0 || old.movementChallenge == 21) && current.movementChallenge == 24;
 
-        // Balance Walk -> Climbing
-        if (vars.splitIndex == 2 && (old.movementChallenge == 0 || old.movementChallenge == 10) && current.movementChallenge == 11)
-        {
-            return true;
+            // Basic combat --> Advanced combat
+            case 7: return (old.movementChallenge == 0 || old.movementChallenge == 27) && current.movementChallenge == 30;
+            default: return false;
         }
-
-        // Climbing -> The L-jump
-        if (vars.splitIndex == 3 && (old.movementChallenge == 0 || old.movementChallenge == 15) && current.movementChallenge == 17)
-        {
-            return true;
-        }
-
-        // The L-jump -> Zip line
-        if (vars.splitIndex == 4 && (old.movementChallenge == 0 || old.movementChallenge == 34) && current.movementChallenge == 18)
-        {
-            return true;
-        }
-
-        // Zip line -> Advanced jumping
-        if (vars.splitIndex == 5 && (old.movementChallenge == 0 || old.movementChallenge == 19) && current.movementChallenge == 37)
-        {
-            return true;
-        }
-
-        // Advanced jumping -> Basic combat
-        if (vars.splitIndex == 6 && (old.movementChallenge == 0 || old.movementChallenge == 21) && current.movementChallenge == 24)
-        {
-            return true;
-        }
-
-        // Basic combat -> Advanced combat
-        return vars.splitIndex == 7 && (old.movementChallenge == 0 || old.movementChallenge == 27) && current.movementChallenge == 30;
     }
 }
