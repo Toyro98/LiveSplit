@@ -141,7 +141,7 @@ start
 split 
 {
     // Checks if player is within the Z distance range of the base object
-    if (current.basePosZ != 0f && (current.playerPosZ - current.basePosZ) <= 720f || (current.playerPosZ - current.basePosZ) >= 1300f) 
+    if (current.playerPosZ - current.basePosZ <= 720f || current.playerPosZ - current.basePosZ >= 1300f) 
     {
         return false;
     }
